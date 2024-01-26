@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <template class="PreferencesWindow" parent="AdwPreferencesWindow">
+    <property name="search_enabled">False</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="name" translatable="yes">Sync</property>
+        <property name="title" translatable="yes">Sync information</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="name" translatable="yes">CalDav</property>
+            <property name="title" translatable="yes">CalDav Sync Server</property>
+            <child>
+              <object class="AdwEntryRow" id="server_url">
+                <property name="title" translatable="yes">Server URL</property>
+                <signal name="changed" handler="on_validate" swapped="no" />
+              </object>
+            </child>
+            <child>
+              <object class="AdwEntryRow" id="username">
+                <property name="title" translatable="yes">Username</property>
+                <signal name="changed" handler="on_validate" swapped="no" />
+              </object>
+            </child>
+            <child>
+              <object class="AdwPasswordEntryRow" id="password">
+                <property name="title" translatable="yes">Password</property>
+                <signal name="changed" handler="on_validate" swapped="no" />
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="test_connection_row">
+                <property name="title">Test Connection</property>
+                <child>
+                  <object class="GtkSpinner" id="spinner"></object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="test_connection">
+                    <property name="label" translatable="yes">_Test</property>
+                    <property name="valign">center</property>
+                    <property name="use_underline">True</property>
+                    <property name="sensitive">False</property>
+                    <signal name="clicked" handler="on_test_connection_button_clicked" swapped="no" />
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

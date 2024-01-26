@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <menu id="main-menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">_Preferences</attribute>
+        <attribute name="action">app.preferences</attribute>
+        <attribute name="accel">&lt;Primary&gt;comma</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="action">win.show-help-overlay</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_About</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+        <attribute name="action">app.quit</attribute>
+        <attribute name="accel">&lt;Primary&gt;q</attribute>
+      </item>
+    </section>
+  </menu>
+  <template class="JnotesWindow" parent="AdwApplicationWindow">
+    <property name="title" translatable="yes">To-Do</property>
+    <property name="width-request">800</property>
+    <property name="height-request">800</property>
+    <child>
+      <object class="AdwBreakpoint">
+        <condition>max-width: 500sp</condition>
+        <setter object="split_view" property="collapsed">True</setter>
+      </object>
+    </child>
+    <property name="content">
+      <object class="AdwNavigationSplitView" id="split_view">
+        <property name="min-sidebar-width">200</property>
+        <property name="sidebar">
+          <object class="Sidebar" id="sidebar">
+
+          </object>
+        </property>
+        <property name="content">
+          <object class="AdwNavigationPage">
+            <property name="title" translatable="yes">Note</property>
+            <property name="child">
+              <object class="AdwToolbarView">
+                <child type="top">
+                  <object class="AdwHeaderBar">
+                    <property name="show-title">False</property>
+                    <child type="end">
+                      <object class="GtkMenuButton">
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="menu-model">main-menu</property>
+                        <property name="tooltip-text" translatable="yes">Main Menu</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <property name="content">
+                  <object class="GtkScrolledWindow">
+                    <property name="child">
+                      <object class="AdwClamp">
+                        <property name="maximum-size">400</property>
+                        <property name="tightening-threshold">300</property>
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="orientation">vertical</property>
+                            <property name="margin-start">12</property>
+                            <property name="margin-end">12</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <object class="GtkEntry" id="entry">
+                                <property name="placeholder-text" translatable="yes">Create new Note…</property>
+                                <property name="secondary-icon-name">list-add-symbolic</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBox" id="tasks_list">
+                                <property name="visible">False</property>
+                                <property name="selection-mode">none</property>
+                                <style>
+                                  <class name="boxed-list" />
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+                      </object>
+                    </property>
+                  </object>
+                </property>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>
+

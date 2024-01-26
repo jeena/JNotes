@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=jnotes
+Exec=jnotes
+Icon=net.jeena.jnotes
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

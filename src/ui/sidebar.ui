@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <template class="Sidebar" parent="AdwNavigationPage">
+    <property name="title">Notes</property>
+    <property name="child">
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar">
+            <child type="start">
+              <object class="GtkToggleButton">
+                <property name="icon-name">list-add-symbolic</property>
+                <property name="tooltip-text" translatable="yes">New Collection</property>
+                <property name="action-name">win.new-collection</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <property name="content">
+          <object class="GtkScrolledWindow">
+            <property name="child">
+              <object class="GtkListBox" id="calendar_set">
+                <style>
+                  <class name="navigation-sidebar"/>
+                </style>
+              </object>
+            </property>
+          </object>
+        </property>
+      </object>
+    </property>
+  </template>
+</interface>
+

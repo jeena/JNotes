@@ -1,0 +1,6 @@
+data/net.jeena.jnotes.desktop.in
+data/net.jeena.jnotes.metainfo.xml.in
+data/net.jeena.jnotes.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

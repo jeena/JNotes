@@ -1,4 +1,4 @@
-# jnotes
+# JNotes
 
 This is a simple gtk4 libadwaita Notes program which uses CalDAV as a backend
 to store the notes in a calendar as VJOURNAL.

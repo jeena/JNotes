@@ -28,6 +28,7 @@ from .window import JnotesWindow
 from .preferences import PreferencesWindow
 from .sidebar import Sidebar
 from .sync import Sync
+from .notes_list import NotesList
 
 
 class JnotesApplication(Adw.Application):
@@ -53,11 +54,19 @@ class JnotesApplication(Adw.Application):
             win = JnotesWindow(application=self)
         win.present()
 
-        self.calendar_set = Sync.get_calendar_set()
-        if not self.calendar_set:
-            self.on_preferences_action(win, False)
-        else:
-            win.sidebar.set_calendars(self.calendar_set)
+        def callback(calendar_set):
+            self.calendar_set = calendar_set
+            if not self.calendar_set:
+                self.on_preferences_action(win, False)
+            else:
+                win.sidebar.set_calendars(self.calendar_set)
+                def callb(calendar):
+                    win.notes_list.set_calendar(calendar)
+                Sync.get_calenndar_notes(self.calendar_set[0], callb)
+
+        Sync.set_spinner(win.sidebar.spinner)
+        Sync.get_calendar_set(callback)
+
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""

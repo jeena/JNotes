@@ -7,12 +7,8 @@
       <object class="AdwToolbarView">
         <child type="top">
           <object class="AdwHeaderBar">
-            <child type="start">
-              <object class="GtkToggleButton">
-                <property name="icon-name">list-add-symbolic</property>
-                <property name="tooltip-text" translatable="yes">New Collection</property>
-                <property name="action-name">win.new-collection</property>
-              </object>
+            <child type="end">
+                  <object class="GtkSpinner" id="spinner"></object>
             </child>
           </object>
         </child>

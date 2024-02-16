@@ -34,6 +34,7 @@ jnotes_sources = [
   'gsettings.py',
   'sync.py',
   'sidebar.py',
+  'notes_list.py',
 ]
 
 install_data(jnotes_sources, install_dir: moduledir)

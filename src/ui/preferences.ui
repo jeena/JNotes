@@ -33,7 +33,7 @@
               <object class="AdwActionRow" id="test_connection_row">
                 <property name="title">Test Connection</property>
                 <child>
-                  <object class="GtkSpinner" id="spinner"></object>
+                  <object class="GtkSpinner" id="preferences_spinner"></object>
                 </child>
                 <child>
                   <object class="GtkButton" id="test_connection">

@@ -25,6 +25,7 @@ class Sidebar(Adw.NavigationPage):
     __gtype_name__ = 'Sidebar'
 
     calendar_set = Gtk.Template.Child()
+    spinner = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

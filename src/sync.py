@@ -40,6 +40,11 @@ def threaded(function: Callable):
 class Sync():
     client = None
     principal = None
+    spinner = None
+
+    @classmethod
+    def set_spinner(self, spinner):
+        self.spinner = spinner
 
     @classmethod
     @threaded
@@ -70,8 +75,10 @@ class Sync():
             logging.warning(e)
 
     @classmethod
-    def get_calendar_set(self):
+    @threaded
+    def get_calendar_set(self, callback):
         calendar_set = CalendarSet()
+        self.spinner.start()
         if not self.client:
             self.init()
         if self.principal:
@@ -79,13 +86,21 @@ class Sync():
             for remote_calendar in remote_calendars:
                 if "VJOURNAL" in remote_calendar.get_supported_components():
                     calendar = Calendar(remote_calendar.get_display_name(), remote_calendar.url)
-                    for journal in remote_calendar.journals():
-                        summary = journal.icalendar_component.get("summary", "")
-                        description = journal.icalendar_component.get("description", "")
-                        calendar.add_note(Note(calendar, summary, description))
                     calendar_set.add_calendar(calendar)
+        self.spinner.stop()
+        callback(calendar_set)
 
-        return calendar_set
+    @classmethod
+    @threaded
+    def get_calenndar_notes(self, calendar, callback):
+        self.spinner.start()
+        remote_calendar = self.principal.calendar(calendar.displayname)
+        for journal in remote_calendar.journals():
+            summary = journal.icalendar_component.get("summary", "")
+            description = journal.icalendar_component.get("description", "")
+            calendar.add_note(Note(calendar, summary, description))
+        self.spinner.stop()
+        callback(calendar)
 
 class CalendarSet(Gio.ListStore):
     def add_calendar(self, calendar):

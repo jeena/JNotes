@@ -31,7 +31,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
     server_url = Gtk.Template.Child()
     username = Gtk.Template.Child()
     password = Gtk.Template.Child()
-    spinner = Gtk.Template.Child()
+    preferences_spinner = Gtk.Template.Child()
     test_connection_row = Gtk.Template.Child()
     test_connection = Gtk.Template.Child()
 
@@ -46,7 +46,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
         server_url = self.server_url.get_text()
         username = self.username.get_text()
         password = self.password.get_text()
-        GLib.idle_add(self.spinner.start)
+        GLib.idle_add(self.preferences_spinner.start)
         GLib.idle_add(self.deactivate_test_button)
         Sync.test_connection(server_url, username, password, self.sync_ok_callback)
 
@@ -72,7 +72,7 @@ class PreferencesWindow(Adw.PreferencesWindow):
 
     def sync_ok_callback(self, ok, e=None):
         self.activate_test_button()
-        self.spinner.stop()
+        self.preferences_spinner.stop()
         if ok:
             self.test_connection_row.set_icon_name("emblem-ok-symbolic")
         else:

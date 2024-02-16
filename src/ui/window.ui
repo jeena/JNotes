@@ -36,9 +36,7 @@
       <object class="AdwNavigationSplitView" id="split_view">
         <property name="min-sidebar-width">200</property>
         <property name="sidebar">
-          <object class="Sidebar" id="sidebar">
-
-          </object>
+          <object class="Sidebar" id="sidebar"></object>
         </property>
         <property name="content">
           <object class="AdwNavigationPage">
@@ -58,37 +56,7 @@
                   </object>
                 </child>
                 <property name="content">
-                  <object class="GtkScrolledWindow">
-                    <property name="child">
-                      <object class="AdwClamp">
-                        <property name="maximum-size">400</property>
-                        <property name="tightening-threshold">300</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="margin-start">12</property>
-                            <property name="margin-end">12</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <object class="GtkEntry" id="entry">
-                                <property name="placeholder-text" translatable="yes">Create new Note…</property>
-                                <property name="secondary-icon-name">list-add-symbolic</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkListBox" id="tasks_list">
-                                <property name="visible">False</property>
-                                <property name="selection-mode">none</property>
-                                <style>
-                                  <class name="boxed-list" />
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </property>
-                      </object>
-                    </property>
-                  </object>
+                  <object class="NotesList" id="notes_list"></object>
                 </property>
               </object>
             </property>
@@ -98,4 +66,5 @@
     </property>
   </template>
 </interface>
+
 

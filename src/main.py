@@ -36,6 +36,7 @@ class JnotesApplication(Adw.Application):
 
     calendar_set = None
 
+
     def __init__(self):
         super().__init__(application_id='net.jeena.jnotes',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
@@ -52,6 +53,7 @@ class JnotesApplication(Adw.Application):
         win = self.props.active_window
         if not win:
             win = JnotesWindow(application=self)
+            win.sidebar.calendar_set.connect('row-selected', self.on_calendar_selected)
         win.present()
 
         def callback(calendar_set):
@@ -60,13 +62,9 @@ class JnotesApplication(Adw.Application):
                 self.on_preferences_action(win, False)
             else:
                 win.sidebar.set_calendars(self.calendar_set)
-                def callb(calendar):
-                    win.notes_list.set_calendar(calendar)
-                Sync.get_calenndar_notes(self.calendar_set[0], callb)
 
         Sync.set_spinner(win.sidebar.spinner)
         Sync.get_calendar_set(callback)
-
 
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
@@ -99,6 +97,12 @@ class JnotesApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
+    def on_calendar_selected(self, container, row):
+        notes_list = self.props.active_window.notes_list
+        Sync.get_calenndar_notes(
+            self.calendar_set[row.get_index()],
+            lambda calendar: notes_list.set_calendar(calendar)
+        )
 
 def main(version):
     """The application's entry point."""

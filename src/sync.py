@@ -94,6 +94,7 @@ class Sync():
     @threaded
     def get_calenndar_notes(self, calendar, callback):
         self.spinner.start()
+        calendar.remove_all()
         remote_calendar = self.principal.calendar(calendar.displayname)
         for journal in remote_calendar.journals():
             summary = journal.icalendar_component.get("summary", "")

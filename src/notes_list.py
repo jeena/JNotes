@@ -16,6 +16,6 @@ class NotesList(Gtk.ScrolledWindow):
         self.notes_list.bind_model(calendar, self.create_item_widget)
 
     def create_item_widget(self, note):
-        print(note.summary)
-        return Gtk.Label(label=note.summary, halign="start",
-            hexpand=True, ellipsize=3)
+        return Adw.ActionRow(title=note.summary,
+            subtitle=note.description)
+

@@ -29,13 +29,13 @@ from .preferences import PreferencesWindow
 from .sidebar import Sidebar
 from .sync import Sync
 from .notes_list import NotesList
+from .note_edit import NoteEditWindow
 
 
 class JnotesApplication(Adw.Application):
     """The main application singleton class."""
 
     calendar_set = None
-
 
     def __init__(self):
         super().__init__(application_id='net.jeena.jnotes',
@@ -54,6 +54,7 @@ class JnotesApplication(Adw.Application):
         if not win:
             win = JnotesWindow(application=self)
             win.sidebar.calendar_set.connect('row-selected', self.on_calendar_selected)
+            win.notes_list.notes_list.connect('row-selected', self.on_note_selected)
         win.present()
 
         def callback(calendar_set):
@@ -103,6 +104,14 @@ class JnotesApplication(Adw.Application):
             self.calendar_set[row.get_index()],
             lambda calendar: notes_list.set_calendar(calendar)
         )
+
+    def on_note_selected(self, container, row):
+        calendar = self.props.active_window.notes_list.calendar
+        note = calendar[row.get_index()]
+        edit_dialog = NoteEditWindow(transient_for=self.props.active_window)
+        edit_dialog.set_note(note)
+        edit_dialog.present()
+
 
 def main(version):
     """The application's entry point."""

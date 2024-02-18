@@ -35,6 +35,7 @@ jnotes_sources = [
   'sync.py',
   'sidebar.py',
   'notes_list.py',
+  'note_edit.py',
 ]
 
 install_data(jnotes_sources, install_dir: moduledir)

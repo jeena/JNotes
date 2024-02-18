@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="NoteEditWindow" parent="AdwWindow">
+    <property name="title" translatable="yes">Notes</property>
+    <property name="width-request">400</property>
+    <property name="height-request">400</property>
+    <property name="content">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkHeaderBar"/>
+        </child>
+        <child>
+          <object class="GtkEntry" id="summary"></object>
+        </child>
+        <child>
+          <object class="GtkTextView" id="description">
+            <property name="width-request">100%</property>
+            <property name="height-request">100%</property>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>

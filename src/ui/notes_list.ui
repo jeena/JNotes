@@ -15,7 +15,6 @@
             <child>
               <object class="GtkListBox" id="notes_list">
                 <property name="visible">True</property>
-                <property name="selection-mode">none</property>
                 <style>
                   <class name="boxed-list" />
                 </style>

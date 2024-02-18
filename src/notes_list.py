@@ -8,14 +8,15 @@ class NotesList(Gtk.ScrolledWindow):
     __gtype_name__ = 'NotesList'
 
     notes_list = Gtk.Template.Child()
+    calendar = None
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def set_calendar(self, calendar):
-        self.notes_list.bind_model(calendar, self.create_item_widget)
+        self.calendar = calendar
+        self.notes_list.bind_model(self.calendar, self.create_item_widget)
 
     def create_item_widget(self, note):
-        return Adw.ActionRow(title=note.summary,
-            subtitle=note.description)
+        return Adw.ActionRow(title=note.summary, subtitle=note.description)
 

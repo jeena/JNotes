@@ -6,5 +6,6 @@
     <file preprocess="xml-stripblanks">ui/help-overlay.ui</file>
     <file preprocess="xml-stripblanks">ui/sidebar.ui</file>
     <file preprocess="xml-stripblanks">ui/notes_list.ui</file>
+    <file preprocess="xml-stripblanks">ui/note_edit.ui</file>
   </gresource>
 </gresources>

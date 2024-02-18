@@ -23,7 +23,7 @@
     </section>
   </menu>
   <template class="JnotesWindow" parent="AdwApplicationWindow">
-    <property name="title" translatable="yes">To-Do</property>
+    <property name="title" translatable="yes">Notes</property>
     <property name="width-request">800</property>
     <property name="height-request">800</property>
     <child>

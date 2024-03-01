@@ -19,6 +19,7 @@
 
 from gi.repository import Adw
 from gi.repository import Gtk
+from .gsettings import GSettings
 
 @Gtk.Template(resource_path='/net/jeena/jnotes/ui/window.ui')
 class JnotesWindow(Adw.ApplicationWindow):
@@ -29,4 +30,11 @@ class JnotesWindow(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        # Remember window state
+        GSettings.bind("width", self, "default_width")
+        GSettings.bind("height", self, "default_height")
+        GSettings.bind("maximized", self, "maximized")
+
+
 

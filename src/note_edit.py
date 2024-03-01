@@ -21,8 +21,8 @@ from gi.repository import Adw
 from gi.repository import Gtk
 
 @Gtk.Template(resource_path='/net/jeena/jnotes/ui/note_edit.ui')
-class NoteEditWindow(Adw.Window):
-    __gtype_name__ = 'NoteEditWindow'
+class NoteEdit(Gtk.ScrolledWindow):
+    __gtype_name__ = 'NoteEdit'
 
     summary = Gtk.Template.Child()
     description = Gtk.Template.Child()
@@ -32,9 +32,8 @@ class NoteEditWindow(Adw.Window):
 
     def set_note(self, note):
         self.note = note
-        self.summary.set_text(self.note.summary)
-        buffer = self.description.get_buffer()
-        buffer.set_text(self.note.description)
+        self.summary.get_buffer().set_text(self.note.summary)
+        self.description.get_buffer().set_text(self.note.description)
 
     def on_save_button_pressed(self, widget):
         print("save button pressed")

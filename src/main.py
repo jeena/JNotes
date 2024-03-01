@@ -29,7 +29,7 @@ from .preferences import PreferencesWindow
 from .sidebar import Sidebar
 from .sync import Sync
 from .notes_list import NotesList
-from .note_edit import NoteEditWindow
+from .note_edit import NoteEdit
 
 
 class JnotesApplication(Adw.Application):
@@ -108,10 +108,7 @@ class JnotesApplication(Adw.Application):
     def on_note_selected(self, container, row):
         calendar = self.props.active_window.notes_list.calendar
         note = calendar[row.get_index()]
-        edit_dialog = NoteEditWindow(transient_for=self.props.active_window)
-        edit_dialog.set_note(note)
-        edit_dialog.present()
-
+        self.props.active_window.note_edit.set_note(note)
 
 def main(version):
     """The application's entry point."""

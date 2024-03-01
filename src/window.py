@@ -27,6 +27,7 @@ class JnotesWindow(Adw.ApplicationWindow):
 
     sidebar = Gtk.Template.Child()
     notes_list = Gtk.Template.Child()
+    note_edit = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

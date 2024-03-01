@@ -56,7 +56,18 @@
                   </object>
                 </child>
                 <property name="content">
-                  <object class="NotesList" id="notes_list"></object>
+                  <object class="AdwOverlaySplitView" id="content_split_view">
+                    <property name="min-sidebar-width">200</property>
+                    <property name="max-sidebar-width">400</property>
+                    <property name="sidebar-width-fraction">0.40</property>
+                    <property name="sidebar-position">1</property>
+                    <property name="content">
+                      <object class="NotesList" id="notes_list"></object>
+                    </property>
+                    <property name="sidebar">
+                      <object class="NoteEdit" id="note_edit"></object>
+                    </property>
+                  </object>
                 </property>
               </object>
             </property>

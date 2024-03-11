@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="Sidebar" parent="AdwNavigationPage">
-    <property name="title">Notes</property>
+  <template class="Sidebar" parent="GtkScrolledWindow">
     <property name="child">
-      <object class="AdwToolbarView">
-        <child type="top">
-          <object class="AdwHeaderBar">
-            <child type="end">
-                  <object class="GtkSpinner" id="spinner"></object>
-            </child>
-          </object>
-        </child>
-        <property name="content">
-          <object class="GtkScrolledWindow">
-            <property name="child">
-              <object class="GtkListBox" id="calendar_set">
-                <style>
-                  <class name="navigation-sidebar"/>
-                </style>
-              </object>
-            </property>
-          </object>
-        </property>
+      <object class="GtkListBox" id="calendar_set">
+        <style>
+          <class name="navigation-sidebar"/>
+        </style>
       </object>
     </property>
   </template>

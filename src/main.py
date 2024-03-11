@@ -64,7 +64,7 @@ class JnotesApplication(Adw.Application):
             else:
                 win.sidebar.set_calendars(self.calendar_set)
 
-        Sync.set_spinner(win.sidebar.spinner)
+        Sync.set_spinner(win.spinner)
         Sync.get_calendar_set(callback)
 
     def on_about_action(self, widget, _):

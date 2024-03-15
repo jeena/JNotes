@@ -5,7 +5,7 @@
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <property name="spacing">24</property>
-        <property name="margin-top">-12</property>
+        <property name="margin-top">0</property>
         <property name="margin-bottom">12</property>
         <property name="margin-start">12</property>
         <property name="margin-end">12</property>
@@ -21,7 +21,11 @@
                 <property name="right-margin">12</property>
                 <property name="wrap-mode">3</property>
                 <property name="css-classes">card</property>
-                <signal name="preedit-changed" handler="on_summary_changed" swapped="no" />
+                <property name="buffer">
+                  <object class="GtkTextBuffer">
+                    <signal name="changed" handler="on_summary_changed" swapped="no" />"
+                  </object>
+                </property>
               </object>"
             </child>
           </object>
@@ -38,7 +42,11 @@
                 <property name="right-margin">12</property>
                 <property name="wrap-mode">3</property>
                 <property name="css-classes">card</property>
-                <signal name="preedit-changed" handler="on_description_changed" swapped="no" />
+                <property name="buffer">
+                  <object class="GtkTextBuffer">
+                    <signal name="changed" handler="on_description_changed" swapped="no" />"
+                  </object>
+                </property>
               </object>
             </child>
           </object>

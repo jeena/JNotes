@@ -104,6 +104,10 @@ class Sync():
         callback(calendar)
 
 class CalendarSet(Gio.ListStore):
+
+    def __init__(self):
+        super().__init__(item_type=Calendar)
+
     def add_calendar(self, calendar):
         self.append(calendar)
 
@@ -111,22 +115,32 @@ class CalendarSet(Gio.ListStore):
         self.remove(calendar)
 
 class Calendar(Gio.ListStore):
+    __gtype_name__ = "Calendar"
     displayname = None
     cal_id = None
 
     def __init__(self, displayname, cal_id):
-        super().__init__()
+        super().__init__(item_type=Note)
         self.displayname = displayname
         self.cal_id = cal_id
 
     def add_note(self, note):
+        # Listen for changes in note to update the list UI
+        note.connect("notify::summary", self.on_notify_note_changed)
+        note.connect("notify::description", self.on_notify_note_changed)
         self.append(note)
 
+    def on_notify_note_changed(self, note, gparamstring):
+        (found, position) = self.find(note)
+        if found:
+            self.items_changed(position, 1, 1)
+
 class Note(GObject.GObject):
+    __gtype_name__ = "Note"
     uid = None
     calendar = None
-    summary = None
-    description = None
+    summary = GObject.property(type=str)
+    description = GObject.property(type=str)
 
     def __init__(self, calendar, summary, description):
         super().__init__()

@@ -37,14 +37,12 @@ class NoteEdit(Gtk.ScrolledWindow):
 
     @Gtk.Template.Callback()
     def on_summary_changed(self, s):
-        pass
         summary = s.get_text(s.get_start_iter(), s.get_end_iter(), False)
         if self.note.summary != summary:
             self.note.set_property("summary", summary)
 
     @Gtk.Template.Callback()
     def on_description_changed(self, d):
-        pass
         description = d.get_text(d.get_start_iter(), d.get_end_iter(), False)
         if self.note.description != description:
-            self.note.description = description
+            self.note.set_property("description", description)

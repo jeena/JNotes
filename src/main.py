@@ -100,8 +100,10 @@ class JnotesApplication(Adw.Application):
 
     def on_calendar_selected(self, container, row):
         notes_list = self.props.active_window.notes_list
+        cal_row = self.calendar_set[row.get_index()]
+        self.props.active_window.notes_list_page.set_title(cal_row.displayname)
         Sync.get_calenndar_notes(
-            self.calendar_set[row.get_index()],
+            cal_row,
             lambda calendar: notes_list.set_calendar(calendar)
         )
 

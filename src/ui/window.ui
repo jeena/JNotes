@@ -35,16 +35,16 @@
           </object>
         </property>
         <property name="content">
-          <object class="AdwNavigationPage">
-            <property name="title" translatable="yes">Note</property>
+          <object class="AdwNavigationPage" id="notes_list_page">
+            <property name="title" translatable="no">Notes</property>
             <property name="child">
-              <object class="AdwOverlaySplitView" id="split_view2">
+              <object class="AdwOverlaySplitView">
                 <property name="sidebar-position">1</property>
                 <property name="content">
                   <object class="AdwToolbarView">
                     <child type="top">
-                      <object class="AdwHeaderBar" id="header_bar3">
-                        <property name="show-title">False</property>
+                      <object class="AdwHeaderBar">
+                        <property name="show-title">True</property>
                       </object>
                     </child>
                     <property name="content">
@@ -55,7 +55,7 @@
                 <property name="sidebar">
                   <object class="AdwToolbarView">
                     <child type="top">
-                      <object class="AdwHeaderBar" id="header_bar2">
+                      <object class="AdwHeaderBar">
                         <property name="show-title">False</property>
                       </object>
                     </child>

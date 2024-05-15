@@ -108,9 +108,10 @@ class JnotesApplication(Adw.Application):
         )
 
     def on_note_selected(self, container, row):
-        calendar = self.props.active_window.notes_list.calendar
-        note = calendar[row.get_index()]
-        self.props.active_window.note_edit.set_note(note)
+        if row:
+            calendar = self.props.active_window.notes_list.calendar
+            note = calendar[row.get_index()]
+            self.props.active_window.note_edit.set_note(note)
 
 def main(version):
     """The application's entry point."""

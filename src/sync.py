@@ -99,9 +99,27 @@ class Sync():
         for journal in remote_calendar.journals():
             summary = journal.icalendar_component.get("summary", "")
             description = journal.icalendar_component.get("description", "")
-            calendar.add_note(Note(calendar, summary, description))
+            note = Note(calendar, summary, description)
+            note.journal = journal
+            note.uid = journal.icalendar_component.get("uid", "")
+            print(journal.data)
+            calendar.add_note(note)
         self.spinner.stop()
         callback(calendar)
+
+    @classmethod
+    @threaded
+    def save_calendar_note(self, note, callback):
+        self.spinner.start()
+        remote_calendar = self.principal.calendar(note.calendar.displayname)
+        journal = note.journal.icalendar_component
+        journal["summary"] = note.summary
+        journal["description"] = note.description
+        note.journal.save()
+        uid = ""
+        self.spinner.stop()
+        callback(uid)
+
 
 class CalendarSet(Gio.ListStore):
 
@@ -133,17 +151,32 @@ class Calendar(Gio.ListStore):
     def on_notify_note_changed(self, note, gparamstring):
         (found, position) = self.find(note)
         if found:
+            note.dirty = True
             self.items_changed(position, 1, 1)
+            note.sync()
 
 class Note(GObject.GObject):
     __gtype_name__ = "Note"
     uid = None
     calendar = None
+    journal = None
     summary = GObject.property(type=str)
     description = GObject.property(type=str)
+    dirty = GObject.Property(type=bool, default=False)
 
     def __init__(self, calendar, summary, description):
         super().__init__()
         self.calendar = calendar
         self.summary = summary
         self.description = description
+
+    def sync(self):
+        if self.dirty:
+            def callback(uid):
+                self.dirty = False
+                if uid:
+                    self.uid = uid
+            Sync.save_calendar_note(self, callback)
+
+
+
